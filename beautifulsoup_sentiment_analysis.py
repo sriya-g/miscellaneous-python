@@ -1,3 +1,6 @@
+#Required Python libraries: Beautiful Soup 4, Requests, Pandas, vaderSentiment, MatPlotLib, Seaborn, LXML
+#Done as part of CodeBozu Fellowship, originally submitted January 17th, 2022, updated in 2023 to work with new CNN website structure
+#Project Description: Sentiment analysis of articles about politicians in news media.
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
