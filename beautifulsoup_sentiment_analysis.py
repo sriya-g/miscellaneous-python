@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from pandas.core.indexes.range import RangeIndex
 import requests
 import pandas as pd
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -25,14 +24,14 @@ url = "https://www.cnn.com/2022/01/13/opinions/bidens-approval-rating-history-ze
 res = requests.get(url)
 html_page = res.content
 soup = BeautifulSoup(html_page)
-text = soup.find(class_ = "pg-rail-tall__body").getText()
+text = soup.find(class_ = "article__content").getText()
 cnn["Joe Biden"] = senscore(text)
 
 url = "https://www.cnn.com/2022/01/15/us/january-6-martin-luther-king-jr-birthday-blake-cec/index.html"
 res = requests.get(url)
 html_page = res.content
 soup = BeautifulSoup(html_page)
-text = soup.find(class_ = "l-container").getText()
+text = soup.find(class_ = "article__content").getText()
 cnn["Donald Trump"] = senscore(text)
 
 url = "https://www.foxnews.com/politics/bidens-legislative-agenda-going-nowhere-one-year-into-presidency"
@@ -115,6 +114,7 @@ heatmap.append(usatoday)
 td = pd.DataFrame(data=heatmap, index=range(0,len(heatmap)))
 td = td.set_index("News Source") 
 print(td)
+#uncomment code below if you want a csv file with the data
 #td.to_csv("posmap.csv")
 
 sns.heatmap(td, cmap = "Blues", xticklabels = True, yticklabels = True)
